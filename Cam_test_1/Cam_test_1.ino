@@ -1,15 +1,18 @@
 
 /* 
-Yo! Track ball and shit!
+Yo! Tracking color and following you!
 */
 
 #include <SPI.h>  
 #include <Pixy.h>
 #include <Servo.h>
+/*Servo decleration*/
 Servo leftservo;
 Servo rightservo;
+/*Camera decleration*/
 Pixy pixy;
-  
+
+/* Movement Funtions*/  
 void leftturn()
 {
   leftservo.writeMicroseconds(1500);
@@ -39,8 +42,10 @@ void setup()
 
 //  Serial.begin(9600);
 //  Serial.print("Starting...\n");
+  /*Pin assignments*/
   leftservo.attach(9);
   rightservo.attach(10);
+/*Camera initialisation*/
   pixy.init();
 }
 
@@ -55,17 +60,10 @@ void loop()
   
   if (blocks)
   {
-//    i++;
-//    
-//    if (i%50==0)
-//    {
-//      sprintf(buf, "Detected %d:\n", blocks);
-//      Serial.print(buf);
       for (j=0; j<blocks; j++)
       {
         sprintf(buf, "  block %d: ", j);
-//        Serial.print(buf); 
-//        pixy.blocks[j].print();
+
         if (pixy.blocks[j].x > 140 && pixy.blocks[j].x < 180)
         {
           if (pixy.blocks[j].y < 120)
@@ -81,7 +79,6 @@ void loop()
             rightturn();
         }
       }
- // }
   }
 }
 
